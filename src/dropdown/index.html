@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../output.css" rel="stylesheet" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="container mx-auto max-w-xl p-5 rounded-md mt-10 bg-white" x-data="{
+        open:false,
+    }">
+        <h1 class="text-2xl font-semibold ">Dropdown</h1>
+
+
+        <div class="mt-10 max-w-md mx-auto shadow p-4 rounded-md relative">
+            <div class="flex items-center justify-between cursor-pointer" @click="open=!open">
+                <span>Select Fruits</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                  </svg> 
+            </div>
+
+            <div class="absolute top-16 py-4 px-2 rounded-md bg-white w-full left-0" :class="open ? 'block':'hidden'">
+                <h1 class="text-xl font-medium my-1 border px-2 py-2 rounded-md cursor-pointer  ">Apple</h1>
+                <h1 class="text-xl font-medium my-1 border px-2 py-2 rounded-md cursor-pointer  ">Banana</h1>
+                <h1 class="text-xl font-medium my-1 border px-2 py-2 rounded-md cursor-pointer  ">Mango</h1>
+                <h1 class="text-xl font-medium my-1 border px-2 py-2 rounded-md cursor-pointer  ">Orange</h1>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

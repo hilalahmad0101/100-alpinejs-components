@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../output.css" rel="stylesheet" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- sorry for the sound there are some issue thank you -->
+
+    <h1 class="text-center font-bold text-xl md:text-4xl my-10">
+      Auto Complete Search
+    </h1>
+
+    <div
+      class="container mx-auto max-w-3xl"
+      x-data="{
+        query:null,
+        users:[
+        'john',
+        'jonson',
+        'Watson',
+        'warner',
+        'Koli',
+        'Sherma'
+        ],
+
+        fetchUsers(){
+            if(this.query.length !=0){
+                let new_users= this.users.filter(user=>user.toLowerCase().includes(this.query.toLowerCase()))
+                this.users=new_users;
+            }else{
+                this.users=[
+                'john',
+                'jonson',
+                'Watson',
+                'warner',
+                'Koli',
+                'Sherma'
+                ]
+            }
+        },
+        userSelected(index){
+            this.query=this.users[index];
+            this.users=[]
+        }
+    }"
+    >
+      <div class="bg-white py-4 rounded-md relative">
+        <div class="px-4">
+          <input
+            type="text"
+            x-model="query"
+            @input="fetchUsers"
+            placeholder="Search here...."
+            class="w-full rounded-md border py-2 px-3 outline-none"
+          />
+        </div>
+
+        <div
+          class="bg-white w-full absolute top-20 left-0"
+          :class="query ? 'block':'hidden'"
+        >
+          <template x-for="(user,index) in users">
+            <div
+              class="hover:bg-blue-500 hover:text-white cursor-pointer"
+              @click="userSelected(index)"
+            >
+              <h1 class="px-4 py-1 font-semibold text-base" x-text="user"></h1>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

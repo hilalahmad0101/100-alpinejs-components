@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../output.css" rel="stylesheet" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body class="bg-gray-100">
+    <div
+      class="bg-white py-3 px-3"
+      x-data="{
+        open:false
+    }"
+    >
+      <div class="container mx-auto">
+        <div class="flex items-center justify-between">
+          <h1 class="font-bold text-xl">Project world</h1>
+          <svg x-transition
+            @click="open=true"
+            x-show="!open"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 md:hidden block cursor-pointer"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
+            />
+          </svg>
+
+          <svg x-transition x-show="open" @click="open=false"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 md:hidden block cursor-pointer"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+
+          <div class="space-x-4 md:flex hidden">
+            <a class="font-medium text-base" href="">Home</a>
+            <a class="font-medium text-base" href="">About</a>
+            <a class="font-medium text-base" href="">Blog</a>
+            <a class="font-medium text-base" href="">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="space-y-4 md:hidden block container mx-auto mt-10"
+        x-transition
+        x-show="open"
+      >
+        <a class="font-medium text-base block" href="">Home</a>
+        <a class="font-medium text-base block" href="">About</a>
+        <a class="font-medium text-base block" href="">Blog</a>
+        <a class="font-medium text-base block" href="">Contact</a>
+      </div>
+    </div>
+  </body>
+</html>
