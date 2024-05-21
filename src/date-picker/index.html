@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../output.css" rel="stylesheet" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- let do the design -->
+
+    <div class="container mx-auto max-w-2xl bg-white rounded-md px-4 pt-4 pb-10 mt-20">
+        <h1 class="text-center font-bold text-xl md:text-4xl my-10">
+            Date Picker
+        </h1>
+
+        <div x-data="datePicker()" class="my-10 relative">
+            <input type="text" x-model="formattedDate" @click="showDatePicker = !showDatePicker"
+                @keydown.escape="showDatePicker=false" class="px-4 py-2 border rounded-md w-full outline-none"
+                placeholder="Select Date" readonly>
+
+            <div x-show="showDatePicker" @click.away="showDatePicker=false"
+                class="absolute mt-2 p-4 bg-white border rounded-lg shadow-md z-10 w-full">
+                <div class="flex justify-between items-center mb-4">
+                    <button @click="prevMonth" class="focus:outline-none">&lt;</button>
+                    <div>
+                        <span x-text="monthNames[month]"></span>
+                        <span x-text="year"></span>
+                    </div>
+                    <button @click="nextMonth" class="focus:outline-none">&gt;</button>
+                </div>
+                <div class="grid grid-cols-7 gap-1 text-center">
+                    <template x-for="day in days">
+                        <div x-text="day" class="font-medium"></div>
+                    </template>
+                    <template x-for="blankday in blanksDays">
+                        <div class="p-2">
+                            
+                        </div>
+                    </template>
+                    <template x-for="date in daysInMonth">
+                        <div x-text="date"
+                        @click="selectDate(date)"
+                        class="p-2 cursor-pointer rounded-md hover:bg-gray-200"
+                        :class="{
+                            'bg-blue-500 text-white':isToday(date),
+                            'bg-gray-200 ' : isSelectedDate(date)
+                        }"
+                        >
+                            
+                        </div>
+                    </template>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <!-- first we will do js part -->
+
+    <script>
+        function datePicker() {
+            return {
+                showDatePicker: false,
+                date: new Date(),
+                month: new Date().getMonth(),
+                year: new Date().getFullYear(),
+                days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                selectedDate: null,
+                get daysInMonth() {
+                    let days = new Date(this.year, this.month + 1, 0).getDate();
+                    let daysArray = [];
+                    for (let i = 1; i <= days; i++) {
+                        daysArray.push(i);
+                    }
+                    return daysArray;
+                },
+
+                // get blanks days
+                get blanksDays() {
+                    let firstDayOfMonth = new Date(this.year, this.month, 1).getDay();
+                    let blanksArray = [];
+                    for (let i = 0; i < firstDayOfMonth; i++) {
+                        blanksArray.push(null);
+                    }
+                    return blanksArray;
+                },
+
+                // get formatted date
+
+                get formattedDate() {
+                    if (!this.selectedDate) return '';
+                    let day = this.selectedDate.getDate();
+                    let month = this.selectedDate.getMonth() + 1;
+                    let year = this.selectedDate.getFullYear();
+                    return `${month}/${day}/${year}` // you can customize it according your need
+                },
+
+                selectDate(day) {
+                    this.selectedDate = new Date(this.year, this.month, day);
+                    this.showDatePicker = false;
+                },
+
+                // check is today
+                isToday(day) {
+                    const today = new Date();
+                    const d = new Date(this.year, this.month, day);
+
+                    return today.toDateString() === d.toDateString();
+                },
+
+                // check is selected date
+
+                isSelectedDate(day) {
+                    if (!this.selectedDate) return false;
+                    const d = new Date(this.year, this.month, day);
+                    return this.selectedDate.toDateString() === d.toDateString();
+                },
+
+                // check previous month
+
+                prevMonth() {
+                    if (this.month === 0) {
+                        this.month = 11,
+                            this.year--;
+                    } else {
+                        this.month--;
+                    }
+                },
+
+                // check next month
+                nextMonth() {
+                    if (this.month === 11) {
+                        this.month = 0,
+                            this.year++;
+                    } else {
+                        this.month++;
+                    }
+                }
+
+                // so js part done let do the design part
+            }
+        }
+    </script>
+</body>
+
+</html>
