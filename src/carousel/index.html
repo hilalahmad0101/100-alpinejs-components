@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../output.css" rel="stylesheet" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>Image Carousel</title>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="container mx-auto max-w-4xl bg-white mt-10 p-4 rounded-md">
+        <h1 class="text-center font-bold text-xl md:text-4xl my-10">
+            Image Carousel
+        </h1>
+
+        <div class="mb-5">
+            <div x-data="carousel()" class="relative w-full  mx-auto">
+                <div class="relative  rounded-md">
+                     <template x-for="(image,index) in images" :key="index">
+                        <div  
+                        x-show="currentIndex === index"
+                        class="absolute inset-0 transition-transform duration-700"
+                        :class="{'translate-x-0': currentIndex === index,'-translate-x-full':currentIndex < index, 'translate-x-full':currentIndex > index}"
+                        >
+                        <img :src="image" class="w-full h-64 object-cover z-30" alt="image">
+                        </div>
+                     </template>
+                </div>
+
+                <!-- left  and right side indicator -->
+
+                <div class="absolute inset-0 flex items-center justify-between top-36">
+                    <button @click="prev" class="p-2 bg-gray-200 text-white rounded-full hover:bg-gray-700">
+                        &#10094
+                    </button>
+                    <button @click="next" class="p-2 bg-gray-200 text-white rounded-full hover:bg-gray-700">
+                        &#10095
+                    </button>
+                </div>
+
+                <div class="absolute bottom-0 left-0 right-0 flex justify-center p-2">
+                    <template x-for="(image,index) in images" :key="index">
+                        <button
+                        @click="goTo(index)"
+                        :class="{'bg-gray-800':currentIndex === index,'bg-gray-400':currentIndex !== index }"
+                        class="w-3 h-3 mx-1 rounded-full"
+                        >
+                            
+                        </button>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js part -->
+
+    <script>
+        function carousel() {
+            return {
+                currentIndex: 0,
+                images: [
+                    'https://images.unsplash.com/photo-1713895384586-e889e771d650?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8',
+                    'https://images.unsplash.com/photo-1716199287176-90597a25c74a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHx8',
+                    'https://images.unsplash.com/photo-1716213420631-286d1d6360f5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8'
+                ],
+                prev() {
+                    this.currentIndex = (this.currentIndex > 0) ? this.currentIndex - 1 : this.images.length - 1;
+                },
+                next() {
+                    this.currentIndex = (this.currentIndex < this.images.length - 1) ? this.currentIndex + 1 : 0;
+                },
+                goTo(index) {
+                    this.currentIndex = index;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../output.css" rel="stylesheet" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>Checkboxs</title>
+</head>
+
+<body class="bg-gray-100">
+ 
+    <!-- let do the design  -->
+    <div class="container mx-auto max-w-xl bg-white p-4 mt-10 rounded-md">
+        <h1 class="text-center font-bold text-xl md:text-4xl my-10">
+            Checkboxs
+        </h1>
+
+        <!-- checkbox 1 -->
+        <div class="my-5">
+            <div x-data="{checked:false}" class="mb-4">
+                <label for="" @click="checked=!checked" class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" x-model="checked" class="hidden">
+                    <div :class="checked ? 'bg-blue-600' : 'bg-gray-400'" class="w-5 h-5 flex items-center justify-between rounded-md translate-colors">
+                        <svg  x-show="checked" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <span>Basic Custom Checkbox</span>  
+                </label>
+            </div>
+        </div>
+
+
+        <!-- checkbox 2 -->
+        <div class="my-5">
+            <div x-data="{checked2:false}" class="mb-4">
+                <label for="" @click="checked2=!checked2" class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" x-model="checked2" class="hidden">
+                    <div :class="checked2 ? 'bg-blue-600' : 'bg-white border-2 broder-gray-300'" class="w-5 h-5 flex items-center justify-between rounded-md translate-colors">
+                        <svg  x-show="checked2" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <span> Custom Checkbox with border</span>  
+                </label>
+            </div>
+        </div>
+
+         <!-- checkbox 2 -->
+         <div class="my-5">
+            <div x-data="{checked3:false}" class="mb-4">
+                <label for="" @click="checked3=!checked3" class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" x-model="checked3" class="hidden">
+                    <div :class="checked3 ? 'bg-blue-600' : 'bg-gray-200'" class="w-5 h-5 rounded-full flex items-center justify-between translate-colors">
+                        <svg  x-show="checked3" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <span> Custom Checkbox with rouneded</span>  
+                </label>
+            </div>
+        </div>
+
+        <!-- checkbox 2 -->
+        <div class="my-5">
+            <div x-data="{checked4:false}" class="mb-4">
+                <label for="" @click="checked4=!checked4" class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" x-model="checked4" class="hidden">
+                    <div :class="checked4 ? 'bg-blue-600' : 'bg-gray-200'" class="w-5 h-5 rounded-md relative flex items-center justify-between translate-colors">
+                        <svg  x-show="checked4"  class="w-5 h-5 text-white absolute transition-transform transform"  :class="{'scale-0' : !checked4 ,'scale-100':checked4}"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <span> Custom Checkbox with animation</span>  
+                </label>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
